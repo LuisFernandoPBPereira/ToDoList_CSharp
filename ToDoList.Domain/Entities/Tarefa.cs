@@ -13,6 +13,9 @@ public class Tarefa
     public Status Status { get; private set; }
     public Guid UsuarioId { get; private set; }
 
+    public ICollection<Categoria> Categorias { get; private set; } = [];
+    public Usuario Usuario { get; private set; } = new Usuario();
+
     private Tarefa()
     {
         

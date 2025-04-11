@@ -1,4 +1,5 @@
-﻿using ToDoList.Domain.Entities;
+﻿using ToDoList.Domain.Builders;
+using ToDoList.Domain.Entities;
 using ToDoList.Domain.Enums;
 
 namespace ToDoList.Application.DTOs.TarefaDTOs;
@@ -12,6 +13,13 @@ public record TarefaDto(string titulo,
 {
     public Tarefa MapearTarefa()
     {
-        return new Tarefa(titulo, descricao, dataCriacao, dataVencimento, prioridade, status);
+        var tarefaBuilder = new TarefaBuilder();
+        return tarefaBuilder.ComTitulo(titulo)
+                            .ComDescricao(descricao)
+                            .ComDataDeCriacao(dataCriacao)
+                            .ComDataDeVencimento(dataVencimento)
+                            .ComPrioridade(prioridade)
+                            .ComStatus(status)
+                            .Build();
     }
 }
