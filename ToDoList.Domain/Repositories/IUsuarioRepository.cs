@@ -8,4 +8,5 @@ public interface IUsuarioRepository
     Task<Usuario> BuscarUsuario(Guid usuarioId);
     Task AtualizarUsuario(Guid usuarioId, Usuario usuario);
     Task RemoverUsuario(Guid usuarioId);
+    Task CadastrarUsuario(Usuario usuario, string senha);
 }

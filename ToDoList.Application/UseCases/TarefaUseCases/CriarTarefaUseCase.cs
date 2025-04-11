@@ -14,11 +14,11 @@ public class CriarTarefaUseCase
         _tarefaRepository = tarefaRepository;
     }
 
-    public async Task<Result<Tarefa>> Execute(TarefaDto tarefaDto)
+    public async Task<Result> Execute(CriarTarefaDto tarefaDto)
     {
-        var tarefa = tarefaDto.MapearTarefa();
-        await _tarefaRepository.CriarTarefa(tarefa);
+        var tarefa = Tarefa.Criar(Guid.NewGuid(), tarefaDto.titulo, tarefaDto.descricao, tarefaDto.dataCriacao, tarefaDto.dataVencimento, tarefaDto.prioridade, tarefaDto.status, tarefaDto.usuarioId);
+        await _tarefaRepository.CriarTarefa(tarefa.Value);
 
-        return Result.Success(tarefa);
+        return Result.Success();
     }
 }

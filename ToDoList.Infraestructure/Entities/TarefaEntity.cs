@@ -6,15 +6,15 @@ namespace ToDoList.Infraestructure.Entities;
 [Table("Tarefa")]
 public class TarefaEntity
 {
-    public Guid Id { get; private set; }
-    public string Titulo { get; private set; }
-    public string? Descricao { get; private set; }
-    public DateTime DataCriacao { get; private set; }
-    public DateTime DataVencimento { get; private set; }
-    public Prioridade Prioridade { get; private set; }
-    public Status Status { get; private set; }
-    public Guid UsuarioId { get; private set; }
+    public Guid Id { get; set; }
+    public string Titulo { get; set; }
+    public string? Descricao { get; set; }
+    public DateTime DataCriacao { get; set; }
+    public DateTime DataVencimento { get; set; }
+    public Prioridade Prioridade { get; set; }
+    public Status Status { get; set; }
+    public Guid UsuarioId { get; set; }
 
-    public ICollection<CategoriaEntity> Categorias { get; private set; } = [];
-    public UsuarioIdentity Usuario { get; private set; } = new UsuarioIdentity();
+    public ICollection<CategoriaEntity> Categorias { get; set; } = [];
+    public UsuarioIdentity Usuario { get; set; } = new UsuarioIdentity();
 }

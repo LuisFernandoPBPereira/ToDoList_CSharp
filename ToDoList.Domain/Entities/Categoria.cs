@@ -2,9 +2,9 @@
 
 public class Categoria
 {
-    public Guid Id { get; private set; }
-    public string Nome { get; private set; }
-    public Guid UsuarioId { get; private set; }
+    public Guid Id { get; set; }
+    public string Nome { get; set; }
+    public Guid UsuarioId { get; set; }
 
     public ICollection<Tarefa> Tarefas { get; set; } = [];
 }

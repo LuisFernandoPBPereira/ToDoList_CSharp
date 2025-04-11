@@ -17,11 +17,11 @@ public class CriarTarefaController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Execute([FromForm] TarefaDto tarefaDto)
+    public async Task<IActionResult> Execute([FromForm] CriarTarefaDto tarefaDto)
     {
         var result = await _criarTarefaUseCase.Execute(tarefaDto);
 
-        if (result.IsFailure) return BadRequest();
+        if (result.IsFailure) return BadRequest(result.Error);
 
         return Created();
     }

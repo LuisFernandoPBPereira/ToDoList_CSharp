@@ -14,9 +14,9 @@ public class TarefaBuilder
     public Status Status { get; private set; }
     public Guid UsuarioId { get; private set; }
 
-    public TarefaBuilder ComId(Guid? id = null)
+    public TarefaBuilder ComId(Guid id)
     {
-        Id = id.HasValue ? (Guid)id : Guid.NewGuid();
+        Id = id;
         return this;
     }
 
@@ -56,9 +56,9 @@ public class TarefaBuilder
         return this;
     }
 
-    public TarefaBuilder ComUsuarioId(Guid? id = null)
+    public TarefaBuilder ComUsuarioId(Guid id)
     {
-        UsuarioId = id.HasValue ? (Guid)id : Guid.NewGuid();
+        UsuarioId = id;
         return this;
     }
 

@@ -7,6 +7,12 @@ namespace ToDoList.Infraestructure.Data;
 
 public class ToDoListContext : IdentityDbContext<UsuarioIdentity, IdentityRole<Guid>, Guid>
 {
+    public ToDoListContext(DbContextOptions options) : base(options)
+    {
+    }
+
+    public DbSet<TarefaEntity> Tarefas { get; set; }
+    public DbSet<CategoriaEntity> Categorias { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
