@@ -1,4 +1,5 @@
-﻿using ToDoList.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using ToDoList.Domain.Entities;
 using ToDoList.Domain.Repositories;
 using ToDoList.Infraestructure.Data;
 using ToDoList.Infraestructure.Mappers;
@@ -13,19 +14,39 @@ public class CategoriaRepository : ICategoriaRepository
         _context = context;
     }
 
-    public Task AtualizarCategoria(Guid categoriaId, Categoria categoria)
+    public async Task AtualizarCategoria(Guid categoriaId, Categoria categoria)
     {
-        throw new NotImplementedException();
+        var categoriaEntity = await _context.Categorias.Where(x => x.Id == categoriaId).AsNoTracking().FirstOrDefaultAsync();
+
+        if (categoriaEntity is null) throw new Exception("Categoria inexistente");
+
+        categoriaEntity.Nome = categoria.Nome;
+
+        _context.Categorias.Update(categoriaEntity);
+        await _context.SaveChangesAsync();
     }
 
-    public Task<Categoria> BuscarCategoria(Guid categoriaId)
+    public async Task<Categoria> BuscarCategoria(Guid categoriaId)
     {
-        throw new NotImplementedException();
+        var categoria = await _context.Categorias.Where(x => x.Id == categoriaId).AsNoTracking().FirstOrDefaultAsync();
+        
+        if (categoria is null) throw new Exception("Categoria inexistente");
+
+        return CategoriaMapper.ToDomain(categoria);
     }
 
-    public Task<IEnumerable<Categoria>> BuscarCategorias(int pagina, int totalCategorias)
+    public async Task<IEnumerable<Categoria>> BuscarCategorias(int pagina, int totalCategorias)
     {
-        throw new NotImplementedException();
+        var categoriasEntity = await _context.Categorias.Skip(pagina).Take(totalCategorias).ToListAsync();
+
+        var categorias = categoriasEntity.Select(x => new Categoria
+        {
+            Id = x.Id,
+            Nome = x.Nome,
+            UsuarioId = x.UsuarioId,
+        }).ToList();
+
+        return categorias;
     }
 
     public async Task CriarCategoria(Categoria categoria)
@@ -36,8 +57,13 @@ public class CategoriaRepository : ICategoriaRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task RemoverCategoria(Guid categoriaId)
+    public async Task RemoverCategoria(Guid categoriaId)
     {
-        throw new NotImplementedException();
+        var categoria = await _context.Categorias.Where(x => x.Id == categoriaId).AsNoTracking().FirstOrDefaultAsync();
+
+        if (categoria is null) throw new Exception("Categoria inexistente");
+
+        _context.Categorias.Remove(categoria);
+        await _context.SaveChangesAsync();
     }
 }
