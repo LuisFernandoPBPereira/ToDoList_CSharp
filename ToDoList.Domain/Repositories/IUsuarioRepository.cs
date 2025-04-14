@@ -9,4 +9,5 @@ public interface IUsuarioRepository
     Task AtualizarUsuario(Guid usuarioId, Usuario usuario);
     Task RemoverUsuario(Guid usuarioId);
     Task CadastrarUsuario(Usuario usuario, string senha);
+    Task<bool> RedefinirSenha(string email, string senhaNova);
 }

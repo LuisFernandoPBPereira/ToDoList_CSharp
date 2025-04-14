@@ -68,6 +68,26 @@ public class UsuarioRepository : IUsuarioRepository
         await _userManager.AddToRoleAsync(usuarioEntity, "Comum");
     }
 
+    public async Task<bool> RedefinirSenha(string email, string senhaNova)
+    {
+        var usuarioIdentity = await _userManager.FindByEmailAsync(email);
+
+        if (usuarioIdentity is null) return false;
+
+        var hash = _userManager.PasswordHasher.HashPassword(usuarioIdentity, senhaNova);
+        usuarioIdentity.PasswordHash = hash;
+
+        var resultUpdatePassword = await _userManager.UpdateAsync(usuarioIdentity);
+        
+        if (!resultUpdatePassword.Succeeded) return false;
+        
+        var resultUpdateSecurityStamp = await _userManager.UpdateSecurityStampAsync(usuarioIdentity);
+
+        if (!resultUpdateSecurityStamp.Succeeded) return false;
+
+        return true;
+    }
+
     public async Task RemoverUsuario(Guid usuarioId)
     {
         var usuario = await _context.Users.Where(x => x.Id == usuarioId).FirstOrDefaultAsync();
