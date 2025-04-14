@@ -6,9 +6,9 @@ namespace ToDoList.Domain.Entities;
 
 public class Usuario
 {
-    public Guid Id { get; private set; }
-    public string Nome { get; private set; }
-    public string Email { get; private set; }
+    public Guid Id { get; set; }
+    public string Nome { get; set; }
+    public string Email { get; set; }
 
     public ICollection<Tarefa> Tarefas { get; set; } = [];
 

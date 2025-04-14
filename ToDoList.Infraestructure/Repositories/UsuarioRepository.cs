@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ToDoList.Domain.Entities;
 using ToDoList.Domain.Repositories;
+using ToDoList.Infraestructure.Data;
 using ToDoList.Infraestructure.Entities;
 using ToDoList.Infraestructure.Mappers;
 
@@ -9,25 +11,46 @@ namespace ToDoList.Infraestructure.Repositories;
 public class UsuarioRepository : IUsuarioRepository
 {
     private readonly UserManager<UsuarioIdentity> _userManager;
+    private readonly ToDoListContext _context;
 
-    public UsuarioRepository(UserManager<UsuarioIdentity> userManager)
+    public UsuarioRepository(UserManager<UsuarioIdentity> userManager, ToDoListContext context)
     {
         _userManager = userManager;
+        _context = context;
     }
 
-    public Task AtualizarUsuario(Guid usuarioId, Usuario usuario)
+    public async Task AtualizarUsuario(Guid usuarioId, Usuario usuario)
     {
-        throw new NotImplementedException();
+        var usuarioIdentity = await _userManager.FindByIdAsync(usuarioId.ToString());
+
+        if (usuarioIdentity == null) throw new Exception("Usuário inexistente");
+
+        usuarioIdentity.UserName = usuario.Nome;
+
+        await _userManager.UpdateAsync(usuarioIdentity);
     }
 
-    public Task<Usuario> BuscarUsuario(Guid usuarioId)
+    public async Task<Usuario> BuscarUsuario(Guid usuarioId)
     {
-        throw new NotImplementedException();
+        var usuarioIdentity = await _userManager.FindByIdAsync(usuarioId.ToString());
+
+        if (usuarioIdentity == null) throw new Exception("Usuário inexistente");
+
+        return UsuarioMapper.ToDomain(usuarioIdentity);
     }
 
-    public Task<IEnumerable<Usuario>> BuscarUsuarios(int pagina, int totalUsuarios)
+    public async Task<IEnumerable<Usuario>> BuscarUsuarios(int pagina, int totalUsuarios)
     {
-        throw new NotImplementedException();
+        var usuariosEntity = await _context.Users.Skip(pagina).Take(totalUsuarios).AsNoTracking().ToListAsync();
+
+        var usuarios = usuariosEntity.Select(x => new Usuario
+        {
+            Id = x.Id,
+            Nome = x.UserName!,
+            Email = x.Email!
+        }).ToList();
+
+        return usuarios;
     }
 
     public async Task CadastrarUsuario(Usuario usuario, string senha)
@@ -45,8 +68,13 @@ public class UsuarioRepository : IUsuarioRepository
         await _userManager.AddToRoleAsync(usuarioEntity, "Comum");
     }
 
-    public Task RemoverUsuario(Guid usuarioId)
+    public async Task RemoverUsuario(Guid usuarioId)
     {
-        throw new NotImplementedException();
+        var usuario = await _context.Users.Where(x => x.Id == usuarioId).FirstOrDefaultAsync();
+
+        if (usuario is null) throw new Exception("Usuário inexistente");
+            
+        _context.Users.Remove(usuario);
+        await _context.SaveChangesAsync();
     }
 }
