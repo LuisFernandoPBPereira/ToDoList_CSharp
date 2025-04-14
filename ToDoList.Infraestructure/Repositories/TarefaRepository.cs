@@ -16,6 +16,21 @@ public class TarefaRepository : ITarefaRepository
         _context = context;
     }
 
+    public async Task AssociarCategoria(Guid categoriaId, Guid tarefaId)
+    {
+        var categoria = await _context.Categorias.Where(x => x.Id == categoriaId).FirstOrDefaultAsync();
+        var tarefa = await _context.Tarefas.Where(x => x.Id == tarefaId).FirstOrDefaultAsync();
+        
+        if (tarefa is null || categoria is null)
+        {
+            throw new Exception("Não foi possível associar uma categoria a uma tarefa");
+        }
+
+        tarefa.Categorias.Add(categoria);
+        _context.Tarefas.Update(tarefa);
+        await _context.SaveChangesAsync();
+    }
+
     public Task AtualizarStatusTarefa(Guid tarefaId, Status status, Tarefa tarefa)
     {
         throw new NotImplementedException();

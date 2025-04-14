@@ -11,4 +11,5 @@ public interface ITarefaRepository
     Task AtualizarStatusTarefa(Guid tarefaId, Status status, Tarefa tarefa);
     Task AtualizarTarefa(Guid tarefaId, Tarefa tarefa);
     Task RemoverTarefa(Guid tarefaId);
+    Task AssociarCategoria(Guid categoriaId, Guid tarefaId);
 }
