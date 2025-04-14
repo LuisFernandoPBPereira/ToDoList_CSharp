@@ -31,19 +31,41 @@ public class TarefaRepository : ITarefaRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task AtualizarStatusTarefa(Guid tarefaId, Status status, Tarefa tarefa)
+    public async Task AtualizarStatusTarefa(Guid tarefaId, Status status)
     {
-        throw new NotImplementedException();
+        var tarefa = await _context.Tarefas.Where(x => x.Id == tarefaId).FirstOrDefaultAsync();
+
+        if (tarefa is null) throw new Exception();
+
+        tarefa.Status = status;
+
+        _context.Tarefas.Update(tarefa);
+        await _context.SaveChangesAsync();
     }
 
-    public Task AtualizarTarefa(Guid tarefaId, Tarefa tarefa)
+    public async Task AtualizarTarefa(Guid tarefaId, Tarefa tarefa)
     {
-        throw new NotImplementedException();
+        var tarefaEntity = await _context.Tarefas.Where(x => x.Id == tarefaId).FirstOrDefaultAsync();
+
+        if (tarefaEntity is null) throw new Exception("Tarefa inexistente");
+
+        tarefaEntity.Titulo = tarefa.Titulo;
+        tarefaEntity.Descricao = tarefa.Descricao;
+        tarefaEntity.DataVencimento = tarefa.DataVencimento;
+        tarefaEntity.Prioridade = tarefa.Prioridade;
+        tarefaEntity.Status = tarefa.Status;
+
+        _context.Tarefas.Update(tarefaEntity);
+        await _context.SaveChangesAsync();
     }
 
-    public Task<Tarefa> BuscarTarefa(Guid tarefaId)
+    public async Task<Tarefa> BuscarTarefa(Guid tarefaId)
     {
-        throw new NotImplementedException();
+        var tarefa = await _context.Tarefas.Where(x => x.Id == tarefaId).AsNoTracking().FirstOrDefaultAsync();
+
+        if (tarefa is null) throw new Exception("Tarefa inexistente");
+
+        return TarefaMapper.ToDomain(tarefa);
     }
 
     public async Task<IEnumerable<Tarefa>> BuscarTarefas(int pagina, int totalTarefas)
@@ -68,8 +90,13 @@ public class TarefaRepository : ITarefaRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task RemoverTarefa(Guid tarefaId)
+    public async Task RemoverTarefa(Guid tarefaId)
     {
-        throw new NotImplementedException();
+        var tarefa = await _context.Tarefas.Where(x => x.Id == tarefaId).AsNoTracking().FirstOrDefaultAsync();
+
+        if (tarefa is null) throw new Exception("Tarefa inexistente");
+
+        _context.Tarefas.Remove(tarefa);
+        await _context.SaveChangesAsync();
     }
 }

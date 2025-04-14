@@ -8,7 +8,7 @@ public interface ITarefaRepository
     Task<IEnumerable<Tarefa>> BuscarTarefas(int pagina, int totalTarefas);
     Task<Tarefa> BuscarTarefa(Guid tarefaId);
     Task CriarTarefa(Tarefa tarefa);
-    Task AtualizarStatusTarefa(Guid tarefaId, Status status, Tarefa tarefa);
+    Task AtualizarStatusTarefa(Guid tarefaId, Status status);
     Task AtualizarTarefa(Guid tarefaId, Tarefa tarefa);
     Task RemoverTarefa(Guid tarefaId);
     Task AssociarCategoria(Guid categoriaId, Guid tarefaId);
