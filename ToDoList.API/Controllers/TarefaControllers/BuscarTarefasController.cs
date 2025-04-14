@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.UseCases.TarefaUseCases;
+using ToDoList.Infraestructure;
 
 namespace ToDoList.Controllers.TarefaControllers;
 
 [Tags("Tarefa")]
+[Authorize(Roles = Roles.Admin)]
 [Route("api/[controller]")]
 [ApiController]
 public class BuscarTarefasController : ControllerBase

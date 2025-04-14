@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using ToDoList.Domain.Entities;
 using ToDoList.Domain.Repositories;
 using ToDoList.Infraestructure.Data;
@@ -10,13 +15,15 @@ namespace ToDoList.Infraestructure.Repositories;
 
 public class UsuarioRepository : IUsuarioRepository
 {
+    private readonly IConfiguration _configuration;
     private readonly UserManager<UsuarioIdentity> _userManager;
     private readonly ToDoListContext _context;
 
-    public UsuarioRepository(UserManager<UsuarioIdentity> userManager, ToDoListContext context)
+    public UsuarioRepository(UserManager<UsuarioIdentity> userManager, ToDoListContext context, IConfiguration configuration)
     {
         _userManager = userManager;
         _context = context;
+        _configuration = configuration;
     }
 
     public async Task AtualizarUsuario(Guid usuarioId, Usuario usuario)

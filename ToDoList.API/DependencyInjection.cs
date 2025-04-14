@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using ToDoList.Application.Services;
 using ToDoList.Application.UseCases.CategoriaUseCases;
 using ToDoList.Application.UseCases.TarefaUseCases;
 using ToDoList.Application.UseCases.UsuarioUseCases;
 using ToDoList.Domain.Repositories;
-using ToDoList.Infraestructure.Entities;
 using ToDoList.Infraestructure.Repositories;
+using ToDoList.Infraestructure.Services;
 
 namespace ToDoList;
 
@@ -14,13 +14,29 @@ public static class DependencyInjection
     {
         serviceCollection.AddScoped<ICategoriaRepository, CategoriaRepository>();
         serviceCollection.AddScoped<CriarCategoriaUseCase>();
+        serviceCollection.AddScoped<AtualizarCategoriaUseCase>();
+        serviceCollection.AddScoped<BuscarCategoriasUseCase>();
+        serviceCollection.AddScoped<BuscarCategoriaUseCase>();
+        serviceCollection.AddScoped<RemoverCategoriaUseCase>();
 
         serviceCollection.AddScoped<IUsuarioRepository, UsuarioRepository>();
         serviceCollection.AddScoped<CadastrarUsuarioUseCase>();
+        serviceCollection.AddScoped<AtualizarUsuarioUseCase>();
+        serviceCollection.AddScoped<RemoverUsuarioUseCase>();
+        serviceCollection.AddScoped<BuscarUsuarioPorIdUseCase>();
+        serviceCollection.AddScoped<BuscarUsuariosUseCase>();
 
         serviceCollection.AddScoped<ITarefaRepository, TarefaRepository>();
         serviceCollection.AddScoped<CriarTarefaUseCase>();
         serviceCollection.AddScoped<BuscarTarefasUseCase>();
+        serviceCollection.AddScoped<BuscarTarefaUseCase>();
         serviceCollection.AddScoped<AssociarCategoriaEmTarefaUseCase>();
+        serviceCollection.AddScoped<AtualizarTarefaUseCase>();
+        serviceCollection.AddScoped<AtualizarStatusUseCase>();
+        serviceCollection.AddScoped<RemoverTarefaUseCase>();
+
+        serviceCollection.AddScoped<IEmailService, EmailService>();
+
+        serviceCollection.AddScoped<IAuthenticationService, AuthenticationService>();
     }
 }
