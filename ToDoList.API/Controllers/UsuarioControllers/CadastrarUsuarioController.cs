@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.DTOs.UsuarioDTOs;
 using ToDoList.Application.UseCases.UsuarioUseCases;
 
@@ -6,6 +7,7 @@ namespace ToDoList.Controllers.UsuarioControllers;
 
 [Tags("Usuário")]
 [Route("api/[controller]")]
+[AllowAnonymous]
 [ApiController]
 public class CadastrarUsuarioController : ControllerBase
 {

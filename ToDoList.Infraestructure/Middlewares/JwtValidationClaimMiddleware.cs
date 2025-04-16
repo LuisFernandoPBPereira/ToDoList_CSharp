@@ -1,6 +1,7 @@
-﻿using Azure.Core;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 
 namespace ToDoList.Infraestructure.Middlewares;
@@ -16,6 +17,12 @@ public class JwtValidationClaimMiddleware
 
     public async Task Invoke(HttpContext context)
     {
+        if (context.GetEndpoint()?.Metadata?.GetMetadata<IAllowAnonymous>() is not null)
+        {
+            await _next(context);
+            return;
+        }
+
         var authHeader = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
         var handler = new JwtSecurityTokenHandler();
         var token = handler.ReadJwtToken(authHeader);
