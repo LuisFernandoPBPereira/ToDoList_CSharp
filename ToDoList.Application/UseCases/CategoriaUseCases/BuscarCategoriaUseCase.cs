@@ -1,4 +1,5 @@
 ﻿using ToDoList.Common;
+using ToDoList.Domain.Entities;
 using ToDoList.Domain.Repositories;
 
 namespace ToDoList.Application.UseCases.CategoriaUseCases;
@@ -12,10 +13,10 @@ public class BuscarCategoriaUseCase
         _repository = repository;
     }
 
-    public async Task<Result> Execute(Guid categoriaId)
+    public async Task<Result<Categoria>> Execute(Guid categoriaId)
     {
-        await _repository.BuscarCategoria(categoriaId);
+        var categoria = await _repository.BuscarCategoria(categoriaId);
 
-        return Result.Success();
+        return Result.Success(categoria);
     }
 }

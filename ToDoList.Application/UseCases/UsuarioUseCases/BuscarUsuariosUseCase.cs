@@ -1,4 +1,5 @@
 ﻿using ToDoList.Common;
+using ToDoList.Domain.Entities;
 using ToDoList.Domain.Repositories;
 
 namespace ToDoList.Application.UseCases.UsuarioUseCases;
@@ -12,7 +13,7 @@ public class BuscarUsuariosUseCase
         _repository = usuarioRepository;
     }
 
-    public async Task<Result> Execute(int pagina, int totalUsuarios)
+    public async Task<Result<IEnumerable<Usuario>>> Execute(int pagina, int totalUsuarios)
     {
         var usuarios = await _repository.BuscarUsuarios(pagina, totalUsuarios);
 

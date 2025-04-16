@@ -6,7 +6,7 @@ using ToDoList.Infraestructure;
 namespace ToDoList.Controllers.TarefaControllers;
 
 [Tags("Tarefa")]
-[Authorize(Roles = Roles.Admin)]
+[Authorize(Roles = Roles.Comum)]
 [Route("api/[controller]")]
 [ApiController]
 public class BuscarTarefasController : ControllerBase
