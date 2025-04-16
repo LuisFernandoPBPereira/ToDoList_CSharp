@@ -16,5 +16,5 @@ public class TarefaEntity
     public Guid UsuarioId { get; set; }
 
     public ICollection<CategoriaEntity> Categorias { get; set; } = [];
-    public UsuarioIdentity Usuario { get; set; } = new UsuarioIdentity();
+    public UsuarioIdentity Usuario { get; set; }
 }

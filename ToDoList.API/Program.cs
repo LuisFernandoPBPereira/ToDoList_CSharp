@@ -7,6 +7,7 @@ using System.Text;
 using ToDoList;
 using ToDoList.Infraestructure.Data;
 using ToDoList.Infraestructure.Entities;
+using ToDoList.Infraestructure.Middlewares;
 using ToDoList.Infraestructure.Seeds;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -87,7 +88,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<JwtValidationClaimMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

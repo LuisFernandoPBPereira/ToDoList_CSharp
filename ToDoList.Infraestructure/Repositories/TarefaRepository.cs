@@ -68,9 +68,13 @@ public class TarefaRepository : ITarefaRepository
         return TarefaMapper.ToDomain(tarefa);
     }
 
-    public async Task<IEnumerable<Tarefa>> BuscarTarefas(int pagina, int totalTarefas)
+    public async Task<IEnumerable<Tarefa>> BuscarTarefas(Guid usuarioId, int pagina, int totalTarefas)
     {
-        return await _context.Tarefas.Skip(pagina).Take(totalTarefas).Select(x => new Tarefa
+        return await _context.Tarefas
+            .Skip(pagina)
+            .Take(totalTarefas)
+            .Where(x => x.UsuarioId == usuarioId)
+            .Select(x => new Tarefa
         {
             Id = x.Id,
             Titulo = x.Titulo,

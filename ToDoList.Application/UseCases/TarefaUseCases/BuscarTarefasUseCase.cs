@@ -13,9 +13,9 @@ public class BuscarTarefasUseCase
         _tarefaRepository = tarefaRepository;
     }
 
-    public async Task<Result<IEnumerable<Tarefa>>> Execute(int pagina = 0, int totalTarefas = 10)
+    public async Task<Result<IEnumerable<Tarefa>>> Execute(Guid usuarioId, int pagina = 0, int totalTarefas = 10)
     {
-        var tarefas = await _tarefaRepository.BuscarTarefas(pagina, totalTarefas);
+        var tarefas = await _tarefaRepository.BuscarTarefas(usuarioId, pagina, totalTarefas);
 
         return Result.Success(tarefas);
     }
