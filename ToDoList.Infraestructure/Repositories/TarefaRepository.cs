@@ -87,6 +87,24 @@ public class TarefaRepository : ITarefaRepository
         }).ToListAsync();
     }
 
+    public async Task<IEnumerable<Tarefa>> BuscarTarefas(int inicioPaginacao, int totalTarefas)
+    {
+        return await _context.Tarefas
+            .Skip(inicioPaginacao)
+            .Take(totalTarefas)
+            .Select(x => new Tarefa
+            {
+                Id = x.Id,
+                Titulo = x.Titulo,
+                Descricao = x.Descricao,
+                DataCriacao = x.DataCriacao,
+                DataVencimento = x.DataVencimento,
+                Prioridade = x.Prioridade,
+                Status = x.Status,
+                UsuarioId = x.UsuarioId
+            }).ToListAsync();
+    }
+
     public async Task CriarTarefa(Tarefa tarefa)
     {
         var tarefaEntity = TarefaMapper.ToEntity(tarefa);
