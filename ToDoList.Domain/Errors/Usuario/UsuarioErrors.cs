@@ -23,4 +23,8 @@ public class UsuarioErrors
     public static readonly Error SenhaInvalida = Error.Failure(
     "Usuario.Failure",
     "A senha deve ter no mínimo 8 caracteres, pelo menos 1 caracter maiúsculo, 1 caracter minúsuclo, 1 número e 1 caracter especial.");
+    
+    public static readonly Error UsuarioProibidoDeRealizarAcao = Error.Conflict(
+    "Usuario.Conflict",
+    "O usuário não pode realizar esta ação.");
 }

@@ -21,7 +21,9 @@ public class BuscarCategoriasController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Execute(int inicioPaginacao, int totalCategorias)
     {
-        var categorias = await _buscarCategorias.Execute(inicioPaginacao, totalCategorias);
+        var usuarioId = HttpContext.RecuperaIdUsuarioLogado();
+
+        var categorias = await _buscarCategorias.Execute(usuarioId, inicioPaginacao, totalCategorias);
 
         if (categorias.IsFailure) return BadRequest(categorias.Error);
 
