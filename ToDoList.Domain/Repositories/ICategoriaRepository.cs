@@ -4,7 +4,7 @@ namespace ToDoList.Domain.Repositories;
 
 public interface ICategoriaRepository
 {
-    Task<IEnumerable<Categoria>> BuscarCategorias(int pagina, int totalCategorias);
+    Task<IEnumerable<Categoria>> BuscarCategorias(int inicioPaginacao, int totalCategorias);
     Task<Categoria> BuscarCategoria(Guid categoriaId);
     Task CriarCategoria(Categoria categoria);
     Task AtualizarCategoria(Guid categoriaId, Categoria categoria);

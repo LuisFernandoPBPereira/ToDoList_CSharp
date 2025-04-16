@@ -19,12 +19,12 @@ public class BuscarTarefasController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Execute(int pagina, int totalTarefas)
+    public async Task<IActionResult> Execute(int inicioPaginacao, int totalTarefas)
     {
         HttpContext.Items.TryGetValue("UsuarioId", out var usuarioId);
         Guid.TryParse(usuarioId?.ToString(), out Guid usuarioIdFormated);
         
-        var result = await _buscarTarefasUseCase.Execute(usuarioIdFormated, pagina, totalTarefas);
+        var result = await _buscarTarefasUseCase.Execute(usuarioIdFormated, inicioPaginacao, totalTarefas);
 
         if (result.IsFailure) return BadRequest(result.Error);
 

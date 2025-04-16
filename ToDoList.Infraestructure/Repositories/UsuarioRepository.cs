@@ -46,9 +46,9 @@ public class UsuarioRepository : IUsuarioRepository
         return UsuarioMapper.ToDomain(usuarioIdentity);
     }
 
-    public async Task<IEnumerable<Usuario>> BuscarUsuarios(int pagina, int totalUsuarios)
+    public async Task<IEnumerable<Usuario>> BuscarUsuarios(int inicioPaginacao, int totalUsuarios)
     {
-        var usuariosEntity = await _context.Users.Skip(pagina).Take(totalUsuarios).AsNoTracking().ToListAsync();
+        var usuariosEntity = await _context.Users.Skip(inicioPaginacao).Take(totalUsuarios).AsNoTracking().ToListAsync();
 
         var usuarios = usuariosEntity.Select(x => new Usuario
         {

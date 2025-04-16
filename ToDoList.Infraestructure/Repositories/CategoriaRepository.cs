@@ -35,9 +35,9 @@ public class CategoriaRepository : ICategoriaRepository
         return CategoriaMapper.ToDomain(categoria);
     }
 
-    public async Task<IEnumerable<Categoria>> BuscarCategorias(int pagina, int totalCategorias)
+    public async Task<IEnumerable<Categoria>> BuscarCategorias(int inicioPaginacao, int totalCategorias)
     {
-        var categoriasEntity = await _context.Categorias.Skip(pagina).Take(totalCategorias).ToListAsync();
+        var categoriasEntity = await _context.Categorias.Skip(inicioPaginacao).Take(totalCategorias).ToListAsync();
 
         var categorias = categoriasEntity.Select(x => new Categoria
         {

@@ -13,9 +13,9 @@ public class BuscarCategoriasUseCase
         _repository = repository;
     }
 
-    public async Task<Result<IEnumerable<Categoria>>> Execute(int pagina, int totalCategorias)
+    public async Task<Result<IEnumerable<Categoria>>> Execute(int inicioPaginacao, int totalCategorias)
     {
-        var categorias = await _repository.BuscarCategorias(pagina, totalCategorias);
+        var categorias = await _repository.BuscarCategorias(inicioPaginacao, totalCategorias);
 
         return Result.Success(categorias);
     }

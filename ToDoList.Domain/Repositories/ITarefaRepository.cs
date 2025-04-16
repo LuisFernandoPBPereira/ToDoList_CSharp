@@ -5,7 +5,7 @@ namespace ToDoList.Domain.Repositories;
 
 public interface ITarefaRepository
 {
-    Task<IEnumerable<Tarefa>> BuscarTarefas(Guid usuarioId, int pagina, int totalTarefas);
+    Task<IEnumerable<Tarefa>> BuscarTarefas(Guid usuarioId, int inicioPaginacao, int totalTarefas);
     Task<Tarefa> BuscarTarefa(Guid tarefaId);
     Task CriarTarefa(Tarefa tarefa);
     Task AtualizarStatusTarefa(Guid tarefaId, Status status);

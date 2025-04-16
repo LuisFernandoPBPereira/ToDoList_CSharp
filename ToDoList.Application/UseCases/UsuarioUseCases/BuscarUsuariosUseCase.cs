@@ -13,9 +13,9 @@ public class BuscarUsuariosUseCase
         _repository = usuarioRepository;
     }
 
-    public async Task<Result<IEnumerable<Usuario>>> Execute(int pagina, int totalUsuarios)
+    public async Task<Result<IEnumerable<Usuario>>> Execute(int inicioPaginacao, int totalUsuarios)
     {
-        var usuarios = await _repository.BuscarUsuarios(pagina, totalUsuarios);
+        var usuarios = await _repository.BuscarUsuarios(inicioPaginacao, totalUsuarios);
 
         return Result.Success(usuarios);
     }
