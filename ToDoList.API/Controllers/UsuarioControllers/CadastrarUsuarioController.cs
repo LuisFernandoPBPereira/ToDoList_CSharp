@@ -19,7 +19,7 @@ public class CadastrarUsuarioController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Execute([FromForm] CriarUsuarioDto usuarioDto)
+    public async Task<IActionResult> Execute([FromBody] CriarUsuarioDto usuarioDto)
     {
         var result = await _cadastrarUsuarioUseCase.Execute(usuarioDto);
 

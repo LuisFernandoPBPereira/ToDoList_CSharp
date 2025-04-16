@@ -20,7 +20,7 @@ public class CriarTarefaController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Execute([FromForm] CriarTarefaDto tarefaDto)
+    public async Task<IActionResult> Execute([FromBody] CriarTarefaDto tarefaDto)
     {
         var result = await _criarTarefaUseCase.Execute(tarefaDto);
 

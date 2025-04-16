@@ -23,7 +23,7 @@ public class JwtValidationClaimMiddleware
             return;
         }
 
-        var authHeader = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+        var authHeader = context.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
         var handler = new JwtSecurityTokenHandler();
         var token = handler.ReadJwtToken(authHeader);
         var usuarioIdToken = token.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;

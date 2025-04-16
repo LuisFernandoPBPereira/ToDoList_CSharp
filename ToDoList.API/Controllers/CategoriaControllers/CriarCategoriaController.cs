@@ -20,7 +20,7 @@ public class CriarCategoriaController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Execute([FromForm] CriarCategoriaDto categoriaDto)
+    public async Task<IActionResult> Execute([FromBody] CriarCategoriaDto categoriaDto)
     {
         var result = await _categoriaUseCase.Execute(categoriaDto);
 

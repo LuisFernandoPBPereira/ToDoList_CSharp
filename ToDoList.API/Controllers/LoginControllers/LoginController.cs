@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ToDoList.Application.DTOs;
 using ToDoList.Application.Services;
 
 namespace ToDoList.Controllers.LoginControllers;
@@ -18,9 +19,9 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Execute(string email, string senha)
+    public async Task<IActionResult> Execute([FromBody] LoginDto loginDto)
     {
-        var token = await _authenticationService.Login(email, senha);
+        var token = await _authenticationService.Login(loginDto.email, loginDto.senha);
 
         return Ok(token);
     }
