@@ -15,6 +15,7 @@ public static class DependencyInjection
         serviceCollection.AddScoped<ICategoriaRepository, CategoriaRepository>();
         serviceCollection.AddScoped<CriarCategoriaUseCase>();
         serviceCollection.AddScoped<AtualizarCategoriaUseCase>();
+        serviceCollection.AddScoped<BuscarCategoriasTodosUsuariosUseCase>();
         serviceCollection.AddScoped<BuscarCategoriasUseCase>();
         serviceCollection.AddScoped<BuscarCategoriaUseCase>();
         serviceCollection.AddScoped<RemoverCategoriaUseCase>();
@@ -28,6 +29,7 @@ public static class DependencyInjection
 
         serviceCollection.AddScoped<ITarefaRepository, TarefaRepository>();
         serviceCollection.AddScoped<CriarTarefaUseCase>();
+        serviceCollection.AddScoped<BuscarTarefasTodosUsuariosUseCase>();
         serviceCollection.AddScoped<BuscarTarefasUseCase>();
         serviceCollection.AddScoped<BuscarTarefaUseCase>();
         serviceCollection.AddScoped<AssociarCategoriaEmTarefaUseCase>();

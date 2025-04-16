@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.DTOs.CategoriaDTOs;
 using ToDoList.Application.UseCases.CategoriaUseCases;
+using ToDoList.Infraestructure;
 
 namespace ToDoList.Controllers.CategoriaControllers;
 
 [Tags("Categoria")]
 [Route("api/[controller]")]
+[Authorize(Roles = $"{Roles.Comum}, {Roles.Admin}")]
 [ApiController]
 public class CriarCategoriaController : ControllerBase
 {

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.Services;
 
 namespace ToDoList.Controllers.LoginControllers;
 
 [Tags("Login")]
 [Route("api/[controller]")]
+[AllowAnonymous]
 [ApiController]
 public class LoginController : ControllerBase
 {

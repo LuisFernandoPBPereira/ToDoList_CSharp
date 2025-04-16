@@ -5,7 +5,7 @@ using ToDoList.Infraestructure;
 
 namespace ToDoList.Controllers.TarefaControllers;
 
-[Tags("Usuário - Admin")]
+[Tags("Tarefa - Admin")]
 [Route("api/[controller]")]
 [Authorize(Roles = $"{Roles.Admin}")]
 [ApiController]
@@ -25,6 +25,6 @@ public class BuscarTarefasTodosUsuariosController : ControllerBase
 
         if (tarefas.IsFailure) return BadRequest(tarefas.Error);
 
-        return Ok(tarefas);
+        return Ok(tarefas.Value);
     }
 }

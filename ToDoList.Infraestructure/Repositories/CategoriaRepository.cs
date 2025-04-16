@@ -49,6 +49,24 @@ public class CategoriaRepository : ICategoriaRepository
         return categorias;
     }
 
+    public async Task<IEnumerable<Categoria>> BuscarCategorias(Guid usuarioId, int inicioPaginacao, int totalCategorias)
+    {
+        var categoriasEntity = await _context.Categorias
+            .Skip(inicioPaginacao)
+            .Take(totalCategorias)
+            .Where(x => x.UsuarioId == usuarioId)
+            .ToListAsync();
+
+        var categorias = categoriasEntity.Select(x => new Categoria
+        {
+            Id = x.Id,
+            Nome = x.Nome,
+            UsuarioId = x.UsuarioId,
+        }).ToList();
+
+        return categorias;
+    }
+
     public async Task CriarCategoria(Categoria categoria)
     {
         var categoriaEntity = CategoriaMapper.ToEntity(categoria);

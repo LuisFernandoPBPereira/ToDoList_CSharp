@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.UseCases.TarefaUseCases;
-using ToDoList.Common;
+using ToDoList.Infraestructure;
 
 namespace ToDoList.Controllers.TarefaControllers;
 
 [Tags("Tarefa")]
 [Route("api/[controller]")]
+[Authorize(Roles = $"{Roles.Comum}, {Roles.Admin}")]
 [ApiController]
 public class AssociarCategoriaController : ControllerBase
 {
