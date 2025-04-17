@@ -4,11 +4,11 @@ using ToDoList.Domain.Repositories;
 
 namespace ToDoList.Application.UseCases.TarefaUseCases;
 
-public class BuscarTarefaUseCase
+public class BuscarTarefaPorIdUseCase
 {
     private readonly ITarefaRepository _repository;
 
-    public BuscarTarefaUseCase(ITarefaRepository repository)
+    public BuscarTarefaPorIdUseCase(ITarefaRepository repository)
     {
         _repository = repository;
     }

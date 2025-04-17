@@ -33,7 +33,7 @@ public static class DependencyInjection
         serviceCollection.AddScoped<CriarTarefaUseCase>();
         serviceCollection.AddScoped<BuscarTarefasAdminsUseCase>();
         serviceCollection.AddScoped<BuscarTarefasUseCase>();
-        serviceCollection.AddScoped<BuscarTarefaUseCase>();
+        serviceCollection.AddScoped<BuscarTarefaPorIdUseCase>();
         serviceCollection.AddScoped<AssociarCategoriaEmTarefaUseCase>();
         serviceCollection.AddScoped<AtualizarTarefaUseCase>();
         serviceCollection.AddScoped<AtualizarStatusUseCase>();
