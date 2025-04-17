@@ -7,7 +7,7 @@ namespace ToDoList.Controllers.TarefaControllers;
 
 [Tags("Tarefa - Admin")]
 [Route("api/[controller]")]
-[Authorize($"{Roles.Admin}")]
+[Authorize(Roles = $"{Roles.Admin}")]
 [ApiController]
 public class BuscarTarefaPorIdAdminController : ControllerBase
 {
@@ -25,6 +25,6 @@ public class BuscarTarefaPorIdAdminController : ControllerBase
 
         if (result.IsFailure) return BadRequest(result.Error);
 
-        return Ok(result);
+        return Ok(result.Value);
     }
 }

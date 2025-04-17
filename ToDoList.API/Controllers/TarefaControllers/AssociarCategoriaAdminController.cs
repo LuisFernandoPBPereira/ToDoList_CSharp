@@ -8,7 +8,7 @@ namespace ToDoList.Controllers.TarefaControllers;
 
 [Tags("Tarefa - Admin")]
 [Route("api/[controller]")]
-[Authorize($"{Roles.Admin}")]
+[Authorize(Roles = $"{Roles.Admin}")]
 [ApiController]
 public class AssociarCategoriaAdminController : ControllerBase
 {

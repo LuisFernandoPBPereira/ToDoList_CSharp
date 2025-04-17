@@ -18,6 +18,7 @@ public class BuscarCategoriaPorIdController : ControllerBase
         _buscarCategoriaPorId = buscarCategoriaPorId;
     }
 
+    [HttpGet]
     public async Task<IActionResult> Execute(Guid usuarioId, Guid tarefaId)
     {
         var categoria = await _buscarCategoriaPorId.Execute(usuarioId, tarefaId);
