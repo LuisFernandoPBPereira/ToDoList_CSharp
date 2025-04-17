@@ -20,9 +20,9 @@ public class AtualizarCategoriaController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> Execute(Guid categoriaId, AtualizarCategoriaDto categoriaDto)
+    public async Task<IActionResult> Execute([FromBody] AtualizarCategoriaDto categoriaDto)
     {
-        var result = await _atualizarCategoria.Execute(categoriaId, categoriaDto);
+        var result = await _atualizarCategoria.Execute(categoriaDto);
 
         if (result.IsFailure) return BadRequest(result.Error);
 

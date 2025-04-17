@@ -14,13 +14,13 @@ public class AtualizarCategoriaUseCase
         _repository = repository;
     }
 
-    public async Task<Result> Execute(Guid categoriaId, AtualizarCategoriaDto categoriaDto)
+    public async Task<Result> Execute(AtualizarCategoriaDto categoriaDto)
     {
         var categoria = Categoria.Criar(Guid.Empty, categoriaDto.nome, Guid.Empty);
 
         if (categoria.IsFailure) return Result.Failure(categoria.Error); 
 
-        await _repository.AtualizarCategoria(categoriaId, categoria.Value);
+        await _repository.AtualizarCategoria(categoriaDto.categoriaId, categoria.Value);
 
         return Result.Success();
     }
