@@ -19,6 +19,7 @@ public class RemoverCategoriaController : ControllerBase
         _removerCategoria = removerCategoria;
     }
 
+    [HttpDelete]
     public async Task<IActionResult> Execute(Guid usuarioId, Guid categoria)
     {
         var result = await _removerCategoria.Execute(usuarioId, categoria);
