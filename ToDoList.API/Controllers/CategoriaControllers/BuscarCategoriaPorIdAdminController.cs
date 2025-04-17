@@ -9,11 +9,11 @@ namespace ToDoList.Controllers.CategoriaControllers;
 [Route("api/[controller]")]
 [Authorize(Roles = $"{Roles.Admin}")]
 [ApiController]
-public class BuscarCategoriaPorIdTodosUsuariosController : ControllerBase
+public class BuscarCategoriaPorIdAdminController : ControllerBase
 {
-    private readonly BuscarCategoriaPorIdTodosUsuariosUseCase _buscarCategoria;
+    private readonly BuscarCategoriaPorIdAdminUseCase _buscarCategoria;
 
-    public BuscarCategoriaPorIdTodosUsuariosController(BuscarCategoriaPorIdTodosUsuariosUseCase buscarCategoria)
+    public BuscarCategoriaPorIdAdminController(BuscarCategoriaPorIdAdminUseCase buscarCategoria)
     {
         _buscarCategoria = buscarCategoria;
     }

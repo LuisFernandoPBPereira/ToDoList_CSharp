@@ -1,4 +1,5 @@
 ﻿using ToDoList.Common;
+using ToDoList.Domain.Errors.Usuario;
 using ToDoList.Domain.Repositories;
 
 namespace ToDoList.Application.UseCases.CategoriaUseCases;
@@ -12,8 +13,12 @@ public class RemoverCategoriaUseCase
         _repository = repository;
     }
 
-    public async Task<Result> Execute(Guid categoriaId)
+    public async Task<Result> Execute(Guid usuarioId, Guid categoriaId)
     {
+        var categoria = await _repository.BuscarCategoriaPorId(categoriaId);
+
+        if (categoria.UsuarioId != usuarioId) return Result.Failure(UsuarioErrors.UsuarioProibidoDeRealizarAcao);
+
         await _repository.RemoverCategoria(categoriaId);
 
         return Result.Success();

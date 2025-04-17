@@ -9,11 +9,11 @@ namespace ToDoList.Controllers.TarefaControllers;
 [Route("api/[controller]")]
 [Authorize(Roles = $"{Roles.Admin}")]
 [ApiController]
-public class BuscarTarefasTodosUsuariosController : ControllerBase
+public class BuscarTarefasAdminController : ControllerBase
 {
     private readonly BuscarTarefasTodosUsuariosUseCase _buscarTarefasTodosUsuarios;
 
-    public BuscarTarefasTodosUsuariosController(BuscarTarefasTodosUsuariosUseCase buscarTarefasTodosUsuarios)
+    public BuscarTarefasAdminController(BuscarTarefasTodosUsuariosUseCase buscarTarefasTodosUsuarios)
     {
         _buscarTarefasTodosUsuarios = buscarTarefasTodosUsuarios;
     }

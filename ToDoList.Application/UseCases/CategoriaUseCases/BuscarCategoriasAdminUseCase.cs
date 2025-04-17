@@ -4,11 +4,11 @@ using ToDoList.Domain.Repositories;
 
 namespace ToDoList.Application.UseCases.CategoriaUseCases;
 
-public class BuscarCategoriasTodosUsuariosUseCase
+public class BuscarCategoriasAdminUseCase
 {
     private readonly ICategoriaRepository _repository;
 
-    public BuscarCategoriasTodosUsuariosUseCase(ICategoriaRepository repository)
+    public BuscarCategoriasAdminUseCase(ICategoriaRepository repository)
     {
         _repository = repository;
     }
