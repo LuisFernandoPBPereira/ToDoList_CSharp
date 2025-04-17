@@ -1,4 +1,5 @@
-﻿using ToDoList.Common;
+﻿using ToDoList.Application.DTOs.CategoriaDTOs;
+using ToDoList.Common;
 using ToDoList.Domain.Entities;
 using ToDoList.Domain.Repositories;
 
@@ -13,9 +14,13 @@ public class AtualizarCategoriaUseCase
         _repository = repository;
     }
 
-    public async Task<Result> Execute(Guid categoriaId, Categoria categoria)
+    public async Task<Result> Execute(Guid categoriaId, AtualizarCategoriaDto categoriaDto)
     {
-        await _repository.AtualizarCategoria(categoriaId, categoria);
+        var categoria = Categoria.Criar(Guid.Empty, categoriaDto.nome, Guid.Empty);
+
+        if (categoria.IsFailure) return Result.Failure(categoria.Error); 
+
+        await _repository.AtualizarCategoria(categoriaId, categoria.Value);
 
         return Result.Success();
     }
