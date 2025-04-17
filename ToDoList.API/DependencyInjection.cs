@@ -21,6 +21,7 @@ public static class DependencyInjection
         serviceCollection.AddScoped<BuscarCategoriaPorIdAdminUseCase>();
         serviceCollection.AddScoped<BuscarCategoriaPorIdUseCase>();
         serviceCollection.AddScoped<RemoverCategoriaUseCase>();
+        serviceCollection.AddScoped<RemoverCategoriaAdminUseCase>();
 
         serviceCollection.AddScoped<IUsuarioRepository, UsuarioRepository>();
         serviceCollection.AddScoped<CadastrarUsuarioUseCase>();
@@ -34,10 +35,14 @@ public static class DependencyInjection
         serviceCollection.AddScoped<BuscarTarefasAdminsUseCase>();
         serviceCollection.AddScoped<BuscarTarefasUseCase>();
         serviceCollection.AddScoped<BuscarTarefaPorIdUseCase>();
+        serviceCollection.AddScoped<BuscarTarefaPorIdAdminUseCase>();
         serviceCollection.AddScoped<AssociarCategoriaEmTarefaUseCase>();
+        serviceCollection.AddScoped<AssociarCategoriaEmTarefaAdminUseCase>();
         serviceCollection.AddScoped<AtualizarTarefaUseCase>();
+        serviceCollection.AddScoped<AtualizarTarefaAdminUseCase>();
         serviceCollection.AddScoped<AtualizarStatusUseCase>();
         serviceCollection.AddScoped<RemoverTarefaUseCase>();
+        serviceCollection.AddScoped<RemoverTarefaAdminUseCase>();
 
         serviceCollection.AddScoped<IEmailService, EmailService>();
 
