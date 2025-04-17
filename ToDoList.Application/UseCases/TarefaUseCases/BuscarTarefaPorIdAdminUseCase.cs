@@ -1,24 +1,21 @@
 ﻿using ToDoList.Common;
 using ToDoList.Domain.Entities;
-using ToDoList.Domain.Errors.Usuario;
 using ToDoList.Domain.Repositories;
 
 namespace ToDoList.Application.UseCases.TarefaUseCases;
 
-public class BuscarTarefaPorIdUseCase
+public class BuscarTarefaPorIdAdminUseCase
 {
     private readonly ITarefaRepository _repository;
 
-    public BuscarTarefaPorIdUseCase(ITarefaRepository repository)
+    public BuscarTarefaPorIdAdminUseCase(ITarefaRepository repository)
     {
         _repository = repository;
     }
 
-    public async Task<Result<Tarefa>> Execute(Guid usuarioId, Guid tarefaId)
+    public async Task<Result<Tarefa>> Execute(Guid tarefaId)
     {
         var tarefa = await _repository.BuscarTarefaPorId(tarefaId);
-
-        if (tarefa.UsuarioId != usuarioId) return Result.Failure<Tarefa>(UsuarioErrors.UsuarioProibidoDeRealizarAcao);
 
         return Result.Success(tarefa);
     }
