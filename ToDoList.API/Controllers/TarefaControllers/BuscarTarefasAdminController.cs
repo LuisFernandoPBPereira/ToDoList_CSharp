@@ -11,9 +11,9 @@ namespace ToDoList.Controllers.TarefaControllers;
 [ApiController]
 public class BuscarTarefasAdminController : ControllerBase
 {
-    private readonly BuscarTarefasTodosUsuariosUseCase _buscarTarefasTodosUsuarios;
+    private readonly BuscarTarefasAdminsUseCase _buscarTarefasTodosUsuarios;
 
-    public BuscarTarefasAdminController(BuscarTarefasTodosUsuariosUseCase buscarTarefasTodosUsuarios)
+    public BuscarTarefasAdminController(BuscarTarefasAdminsUseCase buscarTarefasTodosUsuarios)
     {
         _buscarTarefasTodosUsuarios = buscarTarefasTodosUsuarios;
     }

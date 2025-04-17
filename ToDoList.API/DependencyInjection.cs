@@ -31,7 +31,7 @@ public static class DependencyInjection
 
         serviceCollection.AddScoped<ITarefaRepository, TarefaRepository>();
         serviceCollection.AddScoped<CriarTarefaUseCase>();
-        serviceCollection.AddScoped<BuscarTarefasTodosUsuariosUseCase>();
+        serviceCollection.AddScoped<BuscarTarefasAdminsUseCase>();
         serviceCollection.AddScoped<BuscarTarefasUseCase>();
         serviceCollection.AddScoped<BuscarTarefaUseCase>();
         serviceCollection.AddScoped<AssociarCategoriaEmTarefaUseCase>();
