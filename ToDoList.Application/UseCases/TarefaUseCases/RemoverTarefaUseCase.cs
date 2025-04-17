@@ -15,7 +15,7 @@ public class RemoverTarefaUseCase
 
     public async Task<Result> Execute(Guid usuarioId, Guid tarefaId)
     {
-        var tarefa = await _repository.BuscarTarefa(tarefaId);
+        var tarefa = await _repository.BuscarTarefaPorId(tarefaId);
 
         if (tarefa.UsuarioId != usuarioId) return Result.Failure(UsuarioErrors.UsuarioProibidoDeRealizarAcao);
 

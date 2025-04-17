@@ -17,7 +17,7 @@ public class AssociarCategoriaEmTarefaUseCase
 
     public async Task<Result> Execute(Guid usuarioId, Guid categoriaId, Guid tarefaId)
     {
-        var tarefa = await _tarefaRepository.BuscarTarefa(tarefaId);
+        var tarefa = await _tarefaRepository.BuscarTarefaPorId(tarefaId);
         var categoria = await _categoriaRepository.BuscarCategoriaPorId(categoriaId);
 
         if(categoria.UsuarioId != usuarioId || tarefa.UsuarioId != usuarioId)

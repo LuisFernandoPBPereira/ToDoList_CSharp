@@ -15,7 +15,7 @@ public class BuscarTarefaPorIdUseCase
 
     public async Task<Result<Tarefa>> Execute(Guid tarefaId)
     {
-        var tarefa = await _repository.BuscarTarefa(tarefaId);
+        var tarefa = await _repository.BuscarTarefaPorId(tarefaId);
 
         return Result.Success(tarefa);
     }

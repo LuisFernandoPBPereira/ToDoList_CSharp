@@ -17,7 +17,7 @@ public class AtualizarTarefaUseCase
 
     public async Task<Result> Execute(Guid usuarioId, AtualizarTarefaDto tarefaDto)
     {
-        var tarefaParaAtualizar = await _repository.BuscarTarefa(tarefaDto.tarefaId);
+        var tarefaParaAtualizar = await _repository.BuscarTarefaPorId(tarefaDto.tarefaId);
 
         if (tarefaParaAtualizar.UsuarioId != usuarioId) return Result.Failure(UsuarioErrors.UsuarioProibidoDeRealizarAcao);
 

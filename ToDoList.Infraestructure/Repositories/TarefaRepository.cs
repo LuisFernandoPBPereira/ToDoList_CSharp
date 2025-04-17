@@ -58,7 +58,7 @@ public class TarefaRepository : ITarefaRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Tarefa> BuscarTarefa(Guid tarefaId)
+    public async Task<Tarefa> BuscarTarefaPorId(Guid tarefaId)
     {
         var tarefa = await _context.Tarefas.Where(x => x.Id == tarefaId).AsNoTracking().FirstOrDefaultAsync();
 

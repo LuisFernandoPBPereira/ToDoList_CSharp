@@ -20,7 +20,7 @@ public interface ITarefaRepository
     /// <param name="totalTarefas"></param>
     /// <returns>Lista de Tarefas</returns>
     Task<IEnumerable<Tarefa>> BuscarTarefas(int inicioPaginacao, int totalTarefas);
-    Task<Tarefa> BuscarTarefa(Guid tarefaId);
+    Task<Tarefa> BuscarTarefaPorId(Guid tarefaId);
     Task CriarTarefa(Tarefa tarefa);
     Task AtualizarStatusTarefa(Guid tarefaId, Status status);
     Task AtualizarTarefa(Guid tarefaId, Tarefa tarefa);
