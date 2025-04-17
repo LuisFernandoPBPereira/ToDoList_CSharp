@@ -46,10 +46,29 @@ public class Tarefa
         Prioridade = prioridade;
         Status = status;
     }
+    
+    public Tarefa(string titulo, string? descricao, DateTime dataVencimento, Prioridade prioridade)
+    {
+        Titulo = titulo;
+        Descricao = descricao;
+        DataVencimento = dataVencimento;
+        Prioridade = prioridade;
+    }
 
     public static Result<Tarefa> Criar(Guid id, string titulo, string descricao, DateTime dataCriacao, DateTime dataVencimento, Prioridade prioridade, Status status, Guid usuarioId)
     {
         var tarefa = new Tarefa(id, titulo, descricao, dataCriacao, dataVencimento, prioridade, status, usuarioId);
+
+        var result = Validate(tarefa);
+
+        if (result.IsFailure) return Result.Failure<Tarefa>(result.Error);
+
+        return Result.Success(tarefa);
+    }
+    
+    public static Result<Tarefa> Criar(string titulo, string descricao, DateTime dataVencimento, Prioridade prioridade)
+    {
+        var tarefa = new Tarefa(titulo, descricao, dataVencimento, prioridade);
 
         var result = Validate(tarefa);
 

@@ -53,7 +53,6 @@ public class TarefaRepository : ITarefaRepository
         tarefaEntity.Descricao = tarefa.Descricao;
         tarefaEntity.DataVencimento = tarefa.DataVencimento;
         tarefaEntity.Prioridade = tarefa.Prioridade;
-        tarefaEntity.Status = tarefa.Status;
 
         _context.Tarefas.Update(tarefaEntity);
         await _context.SaveChangesAsync();
