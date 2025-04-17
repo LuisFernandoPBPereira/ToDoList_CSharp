@@ -4,18 +4,18 @@ using ToDoList.Domain.Repositories;
 
 namespace ToDoList.Application.UseCases.CategoriaUseCases;
 
-public class BuscarCategoriaUseCase
+public class BuscarCategoriaPorIdTodosUsuariosUseCase
 {
     private readonly ICategoriaRepository _repository;
 
-    public BuscarCategoriaUseCase(ICategoriaRepository repository)
+    public BuscarCategoriaPorIdTodosUsuariosUseCase(ICategoriaRepository repository)
     {
         _repository = repository;
     }
 
     public async Task<Result<Categoria>> Execute(Guid categoriaId)
     {
-        var categoria = await _repository.BuscarCategoria(categoriaId);
+        var categoria = await _repository.BuscarCategoriaPorId(categoriaId);
 
         return Result.Success(categoria);
     }

@@ -26,9 +26,21 @@ public class CategoriaRepository : ICategoriaRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Categoria> BuscarCategoria(Guid categoriaId)
+    public async Task<Categoria> BuscarCategoriaPorId(Guid categoriaId)
     {
         var categoria = await _context.Categorias.Where(x => x.Id == categoriaId).AsNoTracking().FirstOrDefaultAsync();
+        
+        if (categoria is null) throw new Exception("Categoria inexistente");
+
+        return CategoriaMapper.ToDomain(categoria);
+    }
+    
+    public async Task<Categoria> BuscarCategoriaPorId(Guid usuarioId, Guid categoriaId)
+    {
+        var categoria = await _context.Categorias
+            .Where(x => x.Id == categoriaId && x.UsuarioId == usuarioId)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
         
         if (categoria is null) throw new Exception("Categoria inexistente");
 
