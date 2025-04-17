@@ -15,6 +15,7 @@ public static class DependencyInjection
         serviceCollection.AddScoped<ICategoriaRepository, CategoriaRepository>();
         serviceCollection.AddScoped<CriarCategoriaUseCase>();
         serviceCollection.AddScoped<AtualizarCategoriaUseCase>();
+        serviceCollection.AddScoped<AtualizarCategoriaAdminUseCase>();
         serviceCollection.AddScoped<BuscarCategoriasAdminUseCase>();
         serviceCollection.AddScoped<BuscarCategoriasUseCase>();
         serviceCollection.AddScoped<BuscarCategoriaPorIdAdminUseCase>();

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Application.DTOs.CategoriaDTOs;
 using ToDoList.Application.UseCases.CategoriaUseCases;
+using ToDoList.Domain.Errors.Usuario;
 using ToDoList.Infraestructure;
 
 namespace ToDoList.Controllers.CategoriaControllers;
@@ -22,7 +23,14 @@ public class AtualizarCategoriaController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> Execute([FromBody] AtualizarCategoriaDto categoriaDto)
     {
-        var result = await _atualizarCategoria.Execute(categoriaDto);
+        var usuarioId = HttpContext.RecuperaIdUsuarioLogado();
+
+        var result = await _atualizarCategoria.Execute(usuarioId, categoriaDto);
+
+        if (result.IsFailure && result.Error == UsuarioErrors.UsuarioProibidoDeRealizarAcao)
+        {
+            return Forbid();
+        }
 
         if (result.IsFailure) return BadRequest(result.Error);
 
